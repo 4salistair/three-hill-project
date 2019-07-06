@@ -27,6 +27,7 @@ export class LoginComponent implements OES_element_index_uint{
 
   ngOnInit() {
 
+    // TEST //
     //this.isLoading$ = this.store.pipe(map(state => state.ui.isLoading));
     //this.store.subscribe(data => console.log(data));
     this.loadingSubs = this.uiService.loadingStateChagne.subscribe(isLoading => 
