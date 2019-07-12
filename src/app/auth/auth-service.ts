@@ -39,8 +39,7 @@ export class AuthService {
     registeruser(authdata: AuthData) {
         //    this.uiservice.loadingStateChagne.next(true);
             this.store.dispatch({type: 'START_LOADING'});
-            this.afauth.auth.
-            createUserAndRetrieveDataWithEmailAndPassword(
+            this.afauth.auth.createUserWithEmailAndPassword(
             authdata.email, authdata.password)
             .then(result => { this.uiservice.loadingStateChagne.next(false); })
             .catch(error =>  {
