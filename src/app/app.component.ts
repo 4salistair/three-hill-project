@@ -10,13 +10,16 @@ import { AuthService } from './auth/auth-service';
 
 export class AppComponent implements OnInit {
 
-  title = 'my-first-angular-project';
+  title = 'the three hill project';
   OpenSideNav;
+
+
 
   constructor( private authService: AuthService) {}
 
   ngOnInit() {
     this.authService.innitAuthListener();
+
   }
 
 

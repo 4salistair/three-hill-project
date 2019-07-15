@@ -26,8 +26,10 @@ import { environment } from '../environments/environment';
 import { UIService } from './shared/ui.service';
 import { AuthModule } from './auth/auth.module';
 import { reducers } from './app.reducer';
+import { AgmCoreModule} from '@agm/core';
 
 @NgModule({
+
   declarations: [
     AppComponent,
     WelcomeComponent,
@@ -46,10 +48,14 @@ import { reducers } from './app.reducer';
     AngularFireModule.initializeApp(environment.firebase),
     AuthModule,
     AngularFirestoreModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    AgmCoreModule.forRoot({
+      apiKey: environment.GoogleMapsKey
+   })
   ],
   providers: [AuthService, TrainingService, UIService],
   bootstrap: [AppComponent],
+
 
 })
 export class AppModule { }

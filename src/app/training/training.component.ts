@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TrainingService } from './training.service';
 
+
 @Component({
   selector: 'app-training',
   templateUrl: './training.component.html',
@@ -11,6 +12,8 @@ import { TrainingService } from './training.service';
 export class TrainingComponent implements OnInit, OnDestroy {
 ongoingTraining = false;
 exerciseSubscription: Subscription;
+lat = 51.678418;
+lng = 7.809007;
 
   constructor(private trainingService: TrainingService) { }
 

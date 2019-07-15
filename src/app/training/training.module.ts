@@ -12,6 +12,8 @@ import { NewTrainingComponent } from './new-training/new-training.component';
 import { CurrentTrainingComponent } from './current-training/current-training.component';
 import { StopTrainingComponent } from './current-training/stop-training.component';
 import { TrainingRoutingModule } from './training-routing.module';
+import { AgmCoreModule } from '@agm/core';
+
 
 
 @NgModule({
@@ -28,7 +30,10 @@ import { TrainingRoutingModule } from './training-routing.module';
                     MaterialModule,
                     FlexLayoutModule,
                     FormsModule,
-                    TrainingRoutingModule
+                    TrainingRoutingModule,
+                    AgmCoreModule.forRoot({
+                        apiKey: 'AIzaSyA_X6mefuVdOyLzCK1hFv-OTYi23oI-5kg'
+                      })
                      ],
     exports: [],
     providers: [],

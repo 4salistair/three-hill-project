@@ -23,18 +23,17 @@ export class TrainingService {
               private uiservice: UIService) { }
 
 
-  fetchAvailableExercises() {
+  fetchAvailableLocations() {
     this.uiservice.loadingStateChagne.next(true);
     this.fbSubs.push(this.db
-    .collection('availableExercises')
+    .collection('Locations')
     .snapshotChanges()
     .pipe(map(docData => {
       return docData.map(doc => {
         return {
           id: doc.payload.doc.id,
-          name: doc.payload.doc.data()['name'],
-          duration: doc.payload.doc.data()['duration'],
-          calories: doc.payload.doc.data()['calories'],
+          name: doc.payload.doc.data()['Name'],
+          GeoData: doc.payload.doc.data()['GeoData'],
         };
     });
   })
@@ -43,20 +42,25 @@ export class TrainingService {
       this.uiservice.loadingStateChagne.next(false);
       this.availableExercises = exercises;
       this.exercisesChanged.next([...this.availableExercises]);
-    }, error => { 
-      this.uiservice.showSnackbar('Fetching Exercises Failed', null, 3000);
+    }, error => {
+      this.uiservice.showSnackbar('Fetching Locations Failed', null, 3000);
     }));
   }
 
 startExercise(selectId: string) {
 
     console.log(selectId);
-    this.db.doc('availableExercises/' + selectId).update({lastSelected: new Date()});
+    console.log( this.availableExercises.find(
+             ex => ex.id === selectId
+           ));
 
-    this.runningExercise = this.availableExercises.find(
-        ex => ex.id === selectId
-        );
-      this.exerciseChanged.next({ ...this.runningExercise });
+
+ //this.db.doc('Locations/' + selectId).update({lastSelected: new Date()});
+ //
+ //   this.runningExercise = this.availableExercises.find(
+ //       ex => ex.id === selectId
+ //       );
+  this.exerciseChanged.next({ ...this.runningExercise });
   }
 
 
@@ -70,13 +74,13 @@ startExercise(selectId: string) {
 
   cancelExercise(progress: number)  {
 
-    this.addDataToDatabase({...this.runningExercise,
-      duration: this.runningExercise.duration * (progress / 100),
-      calories: this.runningExercise.calories * (progress / 100),
-      date: new Date(),
-      state: 'cancalled'});
-    this.runningExercise = null;
-    this.exerciseChanged.next(null);
+   // this.addDataToDatabase({...this.runningExercise,
+     // duration: this.runningExercise.duration * (progress / 100),
+   //   calories: this.runningExercise.calories * (progress / 100),
+   //   date: new Date(),
+   //   state: 'cancalled'});
+   //   this.runningExercise = null;
+   //   this.exerciseChanged.next(null);
 
   }
 
