@@ -1,11 +1,15 @@
 
- <agm-map [latitude] = "54.18243" [longitude] = "-2.820268"></agm-map>
+<agm-map [latitude]="lat" [zoom]="15" [longitude]="lng">
+        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
 
 <div class="Welcome" fxLayout ="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="20px" fxLayoutAlign="center center"></div>
 <section class = "current-training" fxLayout="column" fxLayoutAlign="center center">
 
-
-    <p>Whoop</p>
+      
+    <p>{{this.description}}</p>
+    <br>
+    <button> End </button>
 
 
 

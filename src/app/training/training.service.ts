@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Subject } from 'rxjs/Subject';
 import { Exercise } from './exercise.model';
 import { map } from 'rxjs/operators';
-import { Subscription} from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { UIService } from '../shared/ui.service';
-
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 @Injectable()
 export class TrainingService {
@@ -17,10 +16,26 @@ export class TrainingService {
   private runningExercise: Exercise;
   private fbSubs: Subscription[] = [];
 
+  GeoLocal: Observable<Exercise[]>;
+
+  private GeoLocation: AngularFirestoreCollection<Exercise>;
 
 
   constructor(private db: AngularFirestore,
               private uiservice: UIService) { }
+
+
+  returnLongandLat() {
+
+   // this.GeoLocation = this.db.collection('Locations', ref => ref.orderBy('Name', 'asc').limit(1));
+   // console.log( 'geo' +   this.GeoLocation.doc.name);
+
+
+
+  this.db.collection('Locations')
+
+
+  }
 
 
   fetchAvailableLocations() {
@@ -33,7 +48,10 @@ export class TrainingService {
         return {
           id: doc.payload.doc.id,
           name: doc.payload.doc.data()['Name'],
+          description: doc.payload.doc.data()['Description'],
           GeoData: doc.payload.doc.data()['GeoData'],
+          long: doc.payload.doc.data()['lng'],
+          lat: doc.payload.doc.data()['lat'],
         };
     });
   })
@@ -49,19 +67,26 @@ export class TrainingService {
 
 startExercise(selectId: string) {
 
-    console.log(selectId);
-    console.log( this.availableExercises.find(
-             ex => ex.id === selectId
-           ));
+    
 
+            this.availableExercises.find(
+                ex => ex.id === selectId
+              );
+      
 
  //this.db.doc('Locations/' + selectId).update({lastSelected: new Date()});
  //
- //   this.runningExercise = this.availableExercises.find(
- //       ex => ex.id === selectId
- //       );
-  this.exerciseChanged.next({ ...this.runningExercise });
-  }
+
+ this.runningExercise = this.availableExercises.find(
+ ex => ex.id === selectId
+
+  // const docRef = this.availableExercises.find( ex => ex.id === selectId
+
+ );
+
+ this.exerciseChanged.next({ ...this.runningExercise });
+
+}
 
 
   completeExercise(progress: number)  {

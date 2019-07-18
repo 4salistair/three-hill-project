@@ -13,7 +13,7 @@ import { CurrentTrainingComponent } from './current-training/current-training.co
 import { StopTrainingComponent } from './current-training/stop-training.component';
 import { TrainingRoutingModule } from './training-routing.module';
 import { AgmCoreModule } from '@agm/core';
-
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -32,7 +32,7 @@ import { AgmCoreModule } from '@agm/core';
                     FormsModule,
                     TrainingRoutingModule,
                     AgmCoreModule.forRoot({
-                        apiKey: 'AIzaSyA_X6mefuVdOyLzCK1hFv-OTYi23oI-5kg'
+                          apiKey: environment.GoogleMapsKey
                       })
                      ],
     exports: [],

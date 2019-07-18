@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 
 AgmCoreModule.forRoot({
-  apiKey: 'AIzaSyA_X6mefuVdOyLzCK1hFv-OTYi23oI-5kg'
-});
+
+    apiKey: './environment.GoogleMapsKey'
+ });
+
 
 
 @Component({

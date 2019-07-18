@@ -3,13 +3,9 @@ import { MatDialog } from '@angular/material';
 import { StopTrainingComponent } from './stop-training.component';
 import { TrainingService } from '../training.service';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AgmCoreModule } from '@agm/core';
-AgmCoreModule.forRoot({
-
-  apiKey: 'AIzaSyA_X6mefuVdOyLzCK1hFv-OTYi23oI-5kg'
-
-
-});
+import { defineBase } from '@angular/core/src/render3';
 
 
 @Component({
@@ -24,20 +20,67 @@ export class CurrentTrainingComponent implements OnInit {
   progress = 0;
   timer: number;
 
-  lat = 51.678418;
-  lng = 7.809007;
+  lat: number;
+  lng: number;
+  description: string;
+  
+ //err: call
 
   constructor(private dialog: MatDialog, private trainingservice: TrainingService) { }
 
   ngOnInit() {
 
+  //  this.trainingservice.returnLongandLat();
+  this.lat = this.trainingservice.getRunningExercie().lat;
+  this.lng = this.trainingservice.getRunningExercie().long;
+  this.description = this.trainingservice.getRunningExercie().description;
 
 
-   //this.getUserLocation();
+  console.log(this.description);
 
-  //   this.startorResumeTraining();
-  // }
+  // this.err = 'error';
 
+   // this.geo.getCurrentPosition( postion => {this.displayLoction(postion); });
+  // navigator.geolocation.getCurrentPosition( postion => {this.displayLoction(postion); });
+  }
+
+
+    displayLoction ( coords: any ) {
+
+      const lng = coords.longitude;
+      const lat = coords.latitude;
+        }
+      }
+
+
+    //   position => {
+    //  this.lat = position.coords.latitude;
+    //  this.lng = position.coords.longitude;
+    // });
+
+    //console.log('current position ' + this.geo);
+
+   // this.geotest
+    //snapshotChange().
+
+
+    //.GeoData.getCurrentPosition()
+
+   // console.log('current position' + this.trainingservice.getRunningExercie().GeoData.getCurrentPosition.toString());
+
+        // this.geo = this.trainingservice.getRunningExercie().GeoData;
+        // this.geo.getCurrentPosition(position => {
+        //       resolve({lat: position.coords.latitude, lng: position.coords.longitude});
+        //       this.lng = position.coords.longitude;
+        // });
+
+
+  
+ 
+  
+  //console.log('GeoData' + step.getCurrentPosition);
+
+  
   // startorResumeTraining() {
   //   const step = this.trainingservice.getRunningExercie().duration / 100 * 1000;
 
@@ -72,16 +115,23 @@ export class CurrentTrainingComponent implements OnInit {
   //     this.startorResumeTraining(); }
   //   });
 
-  }
+ // }
 
-  // private getUserLocation() {
+  // private getLocation() {
 
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(position => {
-  //       this.lat = position.coords.latitude;
-  //       this.lng = position.coords.longitude;
+  //     if (navigator.geolocation) {
+  //        navigator.geolocation.getCurrentPosition(position => {
+  //        this.lat = position.coords.latitude;
+  //        this.lng = position.coords.longitude;
 
-  //     });
-  //   }
-  // }
-}
+  //        console.log('lat' + this.lat);
+  //        console.log('lng' + this.lng);
+  //      });
+     
+
+
+
+
+
+
+
